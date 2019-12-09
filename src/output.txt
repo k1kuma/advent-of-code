@@ -1,0 +1,17 @@
+Noun:0 - Verb: 0
+Noun:0 - Verb: 1
+Noun:0 - Verb: 2
+Noun:0 - Verb: 3
+Noun:0 - Verb: 4
+Noun:0 - Verb: 5
+Noun:0 - Verb: 6
+Noun:0 - Verb: 7
+Noun:0 - Verb: 8
+Noun:0 - Verb: 9
+Noun:0 - Verb: 10
+Noun:0 - Verb: 11
+Noun:0 - Verb: 12
+Noun:0 - Verb: 13
+Noun:0 - Verb: 14
+FOUND IT
+NaN

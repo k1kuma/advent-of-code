@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Advent of Code</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <h1>Advent of Code!</h1>
+  <script> 
+      // Requiring fs module in which 
+      // readFile function is defined. 
+      const fs = require('fs');
+        
+      // Reading data in utf-8 format 
+      // which is a type of character set. 
+      // Instead of 'utf-8' it can be  
+      // other character set also like 'ascii' 
+      fs.readFile('input.txt', 'utf-8', (err, data) => { 
+          if (err) throw err; 
+        
+          // Converting Raw Buffer to text 
+          // data using tostring function. 
+          console.log(data); 
+      })
+    </script>
+</body>
+</html>
