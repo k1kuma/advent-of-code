@@ -14,6 +14,7 @@ lineReader.eachLine('input.txt', function(line,last) {
   var mass = line;
   total += calcFuel(mass);
   if (last) {
+    console.log('');
     console.log('Calculated Fuel: ' + total);
     return false; // stop reading
   }

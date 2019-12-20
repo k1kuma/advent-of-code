@@ -38,11 +38,9 @@ function computeOperations(memory, noun, verb) {
     console.log(Math.floor(100 * parseInt(noun) + parseInt(verb)));
     return true;
   }
-  else {
-    return false;
-  }
-  
-  return;
+
+  // false if the noun & verb does not exist.
+  return false;
 }
 
 function findNounAndVerb(line) {
@@ -58,8 +56,7 @@ function findNounAndVerb(line) {
 }
 
 const lineReader = require('line-reader');
-lineReader.eachLine('input_day2.txt', function(line,last) {
-// lineReader.eachLine('sample.txt', function(line,last) {
+lineReader.eachLine('input.txt', function(line,last) {
   findNounAndVerb(line);
   if (last) {
     return false; // stop reading
