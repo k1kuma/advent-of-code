@@ -1,14 +1,27 @@
-let input = [];
-let firstWireRead = false;
-let wireA = [];
-let wireB = [];
-let closest = 0;
+// Given a set of intersecting coordinates, calculate the amount of distance both
+// wires A and B need to trave through before getting to that specific point of intersection.
+function calculateDistance(point, wireBTravel) {
+  let wireATravel = 0;
+  for (let i = 0; i < wireA.length; i++) {
+    if (wireA[i].x != point.x || wireA[i].y != point.y) {
+      continue;
+    }
+    // If we get here, then the points are a match, figure out the distance...
+    wireATravel = Math.floor(i + 1);
+  }
+  const totalDistance = Math.floor(wireATravel + wireBTravel);
+  console.log(JSON.stringify(point) + ' -- Wire A: ' + wireATravel + ' -- Wire B: ' + wireBTravel + ' - Wire Total Distance: ' + totalDistance);
+  return totalDistance;
+}
 
 // Given the wire and its path, add the coordinates of where 
 // the wire lies. 
 // If this is wireB, check to see if it crossed paths with wireA.
-function traverseWire(path, wire){ 
+function traverseWire(path, firstWire) {
   let coord = { x: 0, y: 0 };
+  let output = []
+  let wireDistance = 0;
+
   for (let i = 0; i < path.length; i++) {
     let element = path[i];
     let direction = element.charAt(0);
@@ -31,52 +44,49 @@ function traverseWire(path, wire){
         continue;
       }
 
-      const twin = Object.assign({}, coord);
-      wire.push(twin);
-      // Before moving to the next instruction, see if this current coordinate
-      // intersects with the first wire.
-      if (!firstWireRead) {
-        wireTravelA++;
+      const coordClone = Object.assign({}, coord);
+      output.push(coordClone);
+
+      if (firstWire) {
+        continue;
       }
-      else {
-        // Find if the array contains an object by comparing the coordinate values.
-        wireTravelB++;
-        const intersects = wireA.some(element => element.x == twin.x && element.y == twin.y);
-        if (intersects) {
-          const pointDistance = Math.abs(twin.x)  + Math.abs(twin.y);
-          // First point found, set the distance of the closest point.
-          if (closest == 0 ) {
-            closest = pointDistance;
-          }
-          else if (pointDistance < closest) {
-            // New closest interection found.
-            closest = pointDistance;
-            console.log(twin);
-            console.log(pointDistance);
-            console.log('<MK> WIRE DISTANCE TRAVELLED: ');
-            console.log(wireTravelA);
-            console.log(wireTravelB);
-            console.log('<MK> =========================');
-          }
+
+      // Down here means we're traversing wireB. Let's see wire A as the point of reference.
+      // Find if the array contains an object by comparing the coordinate values.
+      const intersects = wireA.some(element => element.x == coordClone.x && element.y == coordClone.y);
+      if (intersects) {
+        // The distance wire B travelled 
+        const aggregateDistance = calculateDistance(coordClone, output.length);
+        if (wireDistance == 0 || aggregateDistance < wireDistance) {
+          wireDistance = aggregateDistance;
+          continue;
         }
       }
     }
   }
-  // Reset the coordinates
-  coord = { x: 0, y: 0 };
+
+  if (!firstWire) {
+    console.log('SHORTEST AGGREGATE WIRE DISTANCE: ' + wireDistance);
+  }
+
+  return output;
 }
 
 function getWirePath(line) {
   input = line.split(',');
   let memory = input.slice();
-  if (!firstWireRead) {
-    traverseWire(memory, wireA);
-    firstWireRead = true;
+  if (firstWire) { 
+    wireA = traverseWire(memory, firstWire);
+    firstWire = false;
   }
   else {
-    traverseWire(memory, wireB);
+    traverseWire(memory, firstWire);
   }
 }
+
+let input = [];
+let firstWire = true;
+let wireA = [];
 
 const lineReader = require('line-reader');
 lineReader.eachLine('input.txt', function(line,last) {
