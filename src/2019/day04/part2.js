@@ -7,22 +7,30 @@ function findNumPasswords(lower, upper) {
   // Given current lower/upper, may not have to.
   for (let i = lower; i <= upper; i++) {
     const numLength = String(i).length;
-    let previous = -1;
-    let adjacentFound = false;
-    let incrementingDigits = true;
 
     if (numLength > 6 || numLength != String(lower).length || numLength != String(upper).length) {
       console.log('Input  is outside of range, trying next number.');
       return;
     }
 
+    let previous = -1;
+    let adjacentFound = false;
+    let incrementingDigits = true;
+    let prevGroup = [];
+
     // We also need to reset everything once we reach each digit...
     for (let digit = 0; digit < String(i).length; digit++) {
       // Check for adjacent digit is equivalent or digits incrementing.
       const value = String(i).charAt(digit);
+      // If this is the first adjacent Found, just set it to true and continue.
       if (previous == value) {
-        adjacentFound  = true;
-        continue;
+        prevGroup.push(value);
+        // Since this could be the first adjacent, push down the previous array
+        // as well...
+        if (!adjacentFound) {
+          prevGroup.push(previous);
+          adjacentFound  = true;
+        }
       }
       else if (previous > value) {
         incrementingDigits = false;
@@ -38,7 +46,8 @@ function findNumPasswords(lower, upper) {
       previous = value;
     }
     // See if these conditions passed, then it is a valid password.
-    if (adjacentFound && incrementingDigits) {
+    if (incrementingDigits) {
+      console.log('<MK>: ' + prevGroup);
       console.log('Eligible Password: ' + i);
       sum++;
     }
