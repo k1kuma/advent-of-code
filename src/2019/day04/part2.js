@@ -14,53 +14,61 @@ function findNumPasswords(lower, upper) {
     }
 
     let previous = String(i).charAt(0);
-    let adjacentDigitsEq = false;
+    let adjacentFound = false;
     let incrementingDigits = true;
-    let prevGroup = [];
+    let digitCountArr = [];
+    let digitCount = 1;
 
     // We also need to reset everything once we reach each digit...
+    const end =  String(i).length - 1;
     for (let digit = 1; digit < String(i).length; digit++) {
+
       // Check for adjacent digit is equivalent or digits incrementing.
       const value = String(i).charAt(digit);
+
       // If this is the first adjacent Found, just set it to true and continue.
       if (previous == value) {
-        prevGroup.push(previous);
-        adjacentDigitsEq = true;
-        // Last digit of the number should be pushed in too if equal to the
-        // previous digit.
-        if (digit == String(i).length - 1) {
-          prevGroup.push(value);
-        }
+        adjacentFound = true;
+        digitCount++;
       }
       else if (previous > value) {
         // The digits are not incrementing from left to right, this number is no
         // longer eligible. Add a multiplier value depending on the decrementing digit to
         // further optimize between the input ranges.
         incrementingDigits = false;
+
         let multiplier = 10000;
         for (let i = 1; i < digit; i++ ) {
           multiplier = multiplier / 10;
         }
+
         if (multiplier > 100) {
           i += multiplier;
         }
         break;
       }
-      else if (previous != value && adjacentDigitsEq) {
-        // This ensures the last matching adjacent digit is included
-        // inside of the prevGroup array.
-        prevGroup.push(previous);
+      else if (previous != value) {
+        // We can now push the digitCount to the digitCountArr.
+        digitCountArr.push(digitCount);
+        digitCount = 1;
       }
+
       previous = value;
+
+      if (digit == end) {
+        digitCountArr.push(digitCount);
+      }
     }
-    // See if these conditions passed, then it is a valid password.
-    if (incrementingDigits) {
-      // For Part Two, there is now an array here (prevGroup) that can be used to
-      // determine whether the adjacent digits are a part of a larger group.
-      console.log('Adjacent Matching Digits: ' + JSON.stringify(prevGroup));
-      console.log('Eligible Password: ' + i);
-      sum++;
+
+    // See either of these conditions failed, then it is an invalid password. For Part Two, another check
+    // is required to see if adjacent digits are not part of a larger group of digits.
+    if (!adjacentFound || !incrementingDigits || !digitCountArr.includes(2)) {
+      continue;
     }
+
+    console.log('Eligible Password: ' + i);
+    sum++;
+
   }
   return sum;
 }
