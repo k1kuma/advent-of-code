@@ -19,6 +19,17 @@ function translateInOutOpcode(op, p1,index) {
   }
 }
 
+function reportError(opcode) {
+  if (immediateOpcode != undefined) {
+    console.log('INVALID OPCODE, PROGRAM WILL FAIL:' + opcode);
+  }
+  else {
+    console.log('INVALID OPCODE, PROGRAM WILL FAIL');
+  }
+  
+  return;
+}
+
 function computeOperations(memory) {
   for (let i = 0 ; i < memory.length; i++) {
     // Setup the potential paramters needed to process the opcodes.
@@ -99,15 +110,16 @@ function computeOperations(memory) {
           p1 = memory[i+1];
         }
 
-        translateInOutOpcode(immediateOpcode, p1, i)
+        translateInOutOpcode(immediateOpcode, p1, i);
         i++;
       }
       else {
-        console.log('invalid opcode fetched: ' + immediateOpcode);
+        reportError(immediateOpcode);
+        break;
       }
     }
     else {
-      console.log('INVALID OPCODE, PROGRAM WILL FAIL: ' + opcode);
+      reportError(opcode);
       break;
     }
   }
