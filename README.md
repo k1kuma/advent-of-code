@@ -8,7 +8,8 @@ is to write them all in javascript.
 To run a problem, go into the path of the year and day and run the following command:
 
 ```
-     node fileName.js
+    cd [path_of_file.js]
+    node fileName.js
 ```
 
 Let's do it...
