@@ -88,8 +88,6 @@ lineReader.eachLine('input.txt', function(line,last) {
       + line.substring(modulo + 1, line.length);
   }
   lineStr += ' - searching index ' + modulo + ' === line ' + y;
-  
-  // Need to fix line 
   console.log(lineStr);
 
   // Increment treeCount if the indexChar is a '#' sign
