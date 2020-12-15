@@ -15,8 +15,12 @@ What do you get if you multiply together the number of trees encountered on each
 Answer: 
 */
 
-let x = 0;
 let y = 1;
+let r1d1 = 0;
+let r1d2 = 0;
+let r3d1 = 1;
+let r5d1 = 0;
+let r7d1 = 0;
 let r1d1Count = 0;
 let r3d1Count = 0;
 let r5d1Count = 0;
@@ -26,20 +30,28 @@ let treeProd = 0;
 
 const lineReader = require('line-reader');
 lineReader.eachLine('input.txt', function(line,last) {
-  if (y > 1) {
-    const r1IndexChar = line.charAt(x % 31);
-    const r3IndexChar  = line.charAt((x) % 31);
-    const r5IndexChar = line.charAt((x+4) % 31);
-    const r7IndexChar = line.charAt((x+6) % 31);
-  
-    console.log('<MK> ' + r1IndexChar + ' ' + r3IndexChar + ' ' + r5IndexChar + ' ' + r7IndexChar);
+  if (y == 1) {
+    console.log(line + ' line 1');
+  }
+  else if (y > 1) {
+    const r1IndexChar = line.charAt(r1d1 % 31);
+    const r3IndexChar  = line.charAt(r3d1 % 31);
+    const r5IndexChar = line.charAt(r5d1 % 31);
+    const r7IndexChar = line.charAt(r7d1 % 31);
   
     if (y % 2 === 1) {
+      const r1d2IndexChar = line.charAt(r1d2 % 31);
       if (r1IndexChar === '#') {
         r1d2Count++;
       }
+      r1d2++;
+      console.log(r1d1 % 31 + ' ' + r1d2 % 31 + ' '+ r3d1 % 31 + ' ' + r5d1 % 31 + ' ' + r7d1 % 31);
+      console.log(r1IndexChar + ' ' + r1d2IndexChar + ' ' + r3IndexChar + ' ' + r5IndexChar + ' ' + r7IndexChar + ' line ' + y);
+    } else {
+      console.log(r1d1 % 31 + ' ' + ' '+ r3d1 % 31 + ' ' + r5d1 % 31 + ' ' + r7d1 % 31);
+      console.log(r1IndexChar + ' ' + r3IndexChar + ' ' + r5IndexChar + ' ' + r7IndexChar  + ' line ' + y);
     }
-  
+
     // Increment treeCounts if the indexChar is a '#' sign
     if (r1IndexChar == '#') {
       r1d1Count++;
@@ -53,10 +65,12 @@ lineReader.eachLine('input.txt', function(line,last) {
     if (r7IndexChar == '#') {
       r7d1Count++;
     }
+    // Increment x by 3 for next line
+    r1d1++;
+    r3d1 += 3;
+    r5d1 += 5;
+    r7d1 += 7;
   }
-
-  // Increment x by 3 for next line
-  x+3;
   y++;
 
   if (last) {
