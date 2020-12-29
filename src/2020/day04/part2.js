@@ -143,7 +143,7 @@ lineReader.eachLine('input.txt', function(line,last) {
   }
 
   if (last) {
-    validatePassport();  // ;ast line may mean not running into blank line to validate
+    validatePassport(); // last line may mean not running into blank line to validate
     console.log();
     console.log('NUMBER OF VALID PASSPORTS: ' + numValid);
     console.log();
