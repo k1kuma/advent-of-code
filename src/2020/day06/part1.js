@@ -11,7 +11,9 @@ function populateGroupQs(answers) {
   for (let i = 0; i < answers.length; i++) {
     const ele = answers.charAt(i);
     if (!qMap[ele]) {
-      qMap[ele] = 'YES';
+      qMap[ele] = 1;
+    } else if (qMap[ele]) {
+      qMap[ele]++;
     }
   }
 }
