@@ -1,3 +1,9 @@
+// --- Day 2: Password Philosophy Part 1 ---
+// https://adventofcode.com/2020/day/2
+// Part1.js
+// Matt Kikuchi (https://github.com/k1kuma)
+// ----------------------------------------
+
 const lineReader = require('line-reader');
 let numValid = 0;
 

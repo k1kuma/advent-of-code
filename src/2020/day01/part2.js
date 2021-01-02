@@ -1,3 +1,9 @@
+// --- Day 1: Report Repair Part 2 ---
+// https://adventofcode.com/2020/day/1
+// Part2.js
+// Matt Kikuchi (https://github.com/k1kuma)
+// ----------------------------------------
+
 const lineReader = require('line-reader');
 const year = 2020;
 let yearsMap = new Map();
