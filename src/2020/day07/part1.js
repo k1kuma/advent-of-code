@@ -7,6 +7,7 @@
 var fs = require("fs");
 var text = fs.readFileSync("./input.txt", "utf-8");
 
+// Remove bags, or bag from each rule.
 var removeUselessWords = function(txt) {
   const uselessWordsArray = [' bags', ' bag'];
   const expStr = uselessWordsArray.join("|");
@@ -51,6 +52,7 @@ function addToBagObj(rules) {
   return bagObj;
 }
 
+// Find bag rules that contain the 'shiny gold' bag.
 function findGold(bagRules) {
 
   let hasGold = [];
@@ -73,8 +75,8 @@ function findGold(bagRules) {
 
 // Search the bags that are part of the rule and 
 // have not yet been listed as a bag that can hold
-// a shiny gold bag
-function finalBagSearch(bagRules, colours) {
+// shiny gold bags
+function bagSearch(bagRules, colours) {
 
   var localBagLength = colours.length;
 
@@ -91,8 +93,9 @@ function finalBagSearch(bagRules, colours) {
 
 // Takes the entire list of bag rules and the colours that 
 // already contain shiny gold bags and adds any more bags that contain
-// those bags that contain gold bags. This continues until there are no 
-// parent bags left that can hold bags that eventually hold shiny gold bags.
+// those bags that contain gold bags.
+// This continues until there are no parent bags left that can hold bags
+// that eventually hold shiny gold bags.
 function findColour(bagRules, colours) {
   const bagKeys = Object.keys(bagRules);
   const bagValues = Object.values(bagRules);
@@ -116,7 +119,7 @@ function findColour(bagRules, colours) {
 function howManyBags(text) {
   const bagRules = addToBagObj(text);
   const colours = findGold(bagRules);
-  return finalBagSearch(bagRules, colours).length;
+  return bagSearch(bagRules, colours).length;
 }
 
 console.log(howManyBags(text));
