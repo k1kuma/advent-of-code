@@ -4,7 +4,6 @@
 // Matt Kikuchi (https://github.com/k1kuma)
 // ----------------------------------------
 
-const { constants } = require("crypto");
 var fs = require("fs");
 var text = fs.readFileSync("./input.txt", "utf-8");
 
