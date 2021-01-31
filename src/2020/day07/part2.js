@@ -22,7 +22,7 @@ var removeUselessWords = function(txt) {
   return filterStr;
 }
 
-function addToBagObj(rules) {
+function addToBagObj(text) {
   let bagObj = {};
   let textByLine = text.split('\n').forEach(rules => {
     const initBag = rules.substring(0, rules.indexOf(' bags contain '));

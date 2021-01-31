@@ -23,9 +23,9 @@ var removeUselessWords = function(txt) {
   return filterStr;
 }
 
-function addToBagObj(rules) {
+function addToBagObj(text) {
   let bagObj = {};
-  let textByLine = text.split('\n').forEach(rules => {
+  text.split('\n').forEach(rules => {
     const initBag = rules.substring(0, rules.indexOf(' bags contain '));
     const bagRules = rules.substring(rules.indexOf(' bags contain ',) + 14);
     const bagRulesList = {};
