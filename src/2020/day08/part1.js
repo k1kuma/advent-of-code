@@ -1,4 +1,4 @@
-// --- Day 8: Report Repair Part 1 ---
+// --- Day 8: Handheld Halting Part 1 ---
 // https://adventofcode.com/2020/day/8
 // Part1.js
 // Matt Kikuchi (https://github.com/k1kuma)
@@ -27,10 +27,10 @@ function fixLoop(){
 
   for (let i = 0; i < seqArr.length;) {
     // Retrive instructions and steps to jump
-    const element = seqArr[i];
+    const element = seqArr[i]
     const fullSeq = retrieveInstructionSteps(element);
     const inst = fullSeq[0];
-    let steps = fullSeq[1];
+    const steps = fullSeq[1];
 
     // Repeat instruction, the infinite loop has started, exit.
     if (seqObj[i]) {
