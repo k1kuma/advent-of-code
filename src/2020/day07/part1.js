@@ -1,4 +1,4 @@
-// --- Day 7: Report Repair Part 1 ---
+// --- Day 7: Handy Haversacks Part 1 ---
 // https://adventofcode.com/2020/day/7
 // Part1.js
 // Matt Kikuchi (https://github.com/k1kuma)

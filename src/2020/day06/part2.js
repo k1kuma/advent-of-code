@@ -1,4 +1,4 @@
-// --- Day 6: Report Repair Part 2 ---
+// --- Day 6: Custom Customs Part 2 ---
 // https://adventofcode.com/2020/day/6
 // Part2.js
 // Matt Kikuchi (https://github.com/k1kuma)
