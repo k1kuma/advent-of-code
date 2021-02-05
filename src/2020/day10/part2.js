@@ -43,3 +43,11 @@ function joltMultiplier(text){
 // multiplied by adapters separeted by 3 jolts.
 console.log('Number of 1-jolt diffs * Number of 3-jolf diffs '
               + joltMultiplier(text));
+
+// In this smaller example (see adventOfCode.com), when using every adapter,
+// there are 7 differences of 1 jolt and 5 differences of 3 jolts.
+
+// In this larger example (sample.txt), in a chain that uses all of the adapters,
+// there are 22 differences of 1 jolt and 10 differences of 3 jolts.
+
+
