@@ -7,47 +7,66 @@
 var fs = require("fs");
 var text = fs.readFileSync("./sample.txt", "utf-8");
 
-function joltMultiplier(text){
-  let oneJoltAdpt = 0;
-  let threeJoltAdpt = 0;
+function arrangementCount(text){
+  let input = text.split('\n').map(str => parseInt(str));
+  input.push(0);
+  input.push(Math.max(...input) + 3);
+
+  const maxPlusOne = Math.max(...input) + 1;
 
   // Setup sorted list of adapters joltages.
-  const input = text.split('\n').sort(function(a, b) {
-    return a - b;
+  input.sort(function(a, b) {
+    return parseInt(a - b);
   });
 
-  for (let h = 0; h < input.length; h++) {
-    let joltDiff;
-    if (h == 0) {
-      joltDiff = input[h] - 0;
-    } else {
-      joltDiff = input[h] - input[h - 1];
-    }
-    if (joltDiff == 3) { 
-      threeJoltAdpt++;
-    } else if (joltDiff == 1) { 
-      oneJoltAdpt++;
-    }
-  }
-  // Increment for devices' built-in joltage adapter.
-  threeJoltAdpt++;
+  let paths = [];
+  paths[0] = 1;
 
   console.log(input);
-  console.log(oneJoltAdpt);
-  console.log(threeJoltAdpt);
+  for (let i = 1; i <= maxPlusOne; i++) {
+    for (let x = 1; x <= 4; x++) {
+      iMinusX = parseInt(i) - parseInt(x);
+      if (input.includes(iMinusX)) {
+        console.log('paths[' + i + '] = ' + paths[iMinusX] + ' ====> ' + iMinusX);
+        // paths[i] += paths[i-x];
+        paths[i] = iMinusX;
+      }
+    }
+  }
 
-  return oneJoltAdpt * threeJoltAdpt;
+  console.log(paths);
+  return paths.reduce((a, b) => a * b, 0);
+
+  //        Python Solution
+  //   data = [16,10,15,5,1,11,7,19,6,12,4];
+  //   data.append(0);
+  //   data.append(max(data) + 3);
+  //   data.sort();
+
+  // maxPlusOne = max(data) + 1;
+
+  // paths = [0] * maxPlusOne;
+  // paths[0] = 1;
+
+  // for index in range (1,maxPlusOne):
+  //     for x in range (1,4):
+  //         if (index - x) in data:
+  //             paths[index] += paths[index-x]
+
+  // print('hello');
+  // print(paths);
+  // print(str(paths[-1]));
 }
-
-// Find and print out the number of adapters separated by 1 jolt 
-// multiplied by adapters separeted by 3 jolts.
-console.log('Number of 1-jolt diffs * Number of 3-jolf diffs '
-              + joltMultiplier(text));
 
 // In this smaller example (see adventOfCode.com), when using every adapter,
 // there are 7 differences of 1 jolt and 5 differences of 3 jolts.
+// 11 arrangements
 
 // In this larger example (sample.txt), in a chain that uses all of the adapters,
 // there are 22 differences of 1 jolt and 10 differences of 3 jolts.
+// 19208 arrangements
 
-
+// Find and print out the number of arrangers the adapters can 
+// be placed in to validly reach 0 to default highest adapter joltage.
+console.log('Number of adapter arrangements: '
+              + arrangementCount(text));
