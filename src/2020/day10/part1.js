@@ -16,6 +16,7 @@ function joltMultiplier(text){
     return a - b;
   });
 
+  // Count number of adapters separated by 1 or 3 joltages.
   for (let h = 0; h < input.length; h++) {
     let joltDiff;
     if (h == 0) {
