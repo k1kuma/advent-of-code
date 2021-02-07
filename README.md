@@ -4,9 +4,7 @@ Welcome to Matt Kikuchi's Advent of Code repository. Advent of Code is a series 
 released every year from December 1st to Christmas Day, with each puzzle having two parts. 
 
 Puzzles come in a variety of difficulty levels and can be solved in any programming language.
-This repo mostly contains solutions written in Node:
-
-https://nodejs.org
+This repo mostly contains solutions written in Node (https://nodejs.org).
 
 Please see https://adventofcode.com/2020/about to learn more about Advent of Code. 
 
