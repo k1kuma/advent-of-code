@@ -1,0 +1,14 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "Advent of Code solutions",
+  "main": "index.js",
+  "scripts": {
+    "run": "node",
+    "aoc": "node src/$npm_config_year/day$npm_config_day/part$npm_config_part.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["advent-of-code"],
+  "author": "",
+  "license": "MIT"
+}
