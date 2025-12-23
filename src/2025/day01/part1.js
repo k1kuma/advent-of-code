@@ -5,35 +5,41 @@
 // ----------------------------------------
 
 var fs = require("fs");
-var text = fs.readFileSync("./input.txt", "utf-8");
+var path = require("path");
+var text = fs.readFileSync(path.join(__dirname, "input.txt"), "utf-8");
 
-function joltMultiplier(text){
+function secretEntrance(text){
   let zeroCounter = 0;
+  let current = 50;
+  const input = text.split('\n').filter(line => line.trim() !== '');
 
-  console.log(text);
-  const input = text.split('\n');
-  console.log(input);
-  // Count number of adapters separated by 1 or 3 joltages.
-  // for (let h = 0; h < input.length; h++) {
-  //   let joltDiff;
-  //   if (h == 0) {
-  //     joltDiff = input[h] - 0;
-  //   } else {
-  //     joltDiff = input[h] - input[h - 1];
-  //   }
-  //   if (joltDiff == 3) { 
-  //     threeJoltAdpt++;
-  //   } else if (joltDiff == 1) { 
-  //     oneJoltAdpt++;
-  //   }
-  // }
-  // // Increment for devices' built-in joltage adapter.
-  // threeJoltAdpt++;
+  for (let i = 0; i < input.length; i++) {
+    let line = input[i].trim();
+    let direction = line[0];
+    let magnitude = parseInt(line.slice(1), 10);
+
+    if (direction === 'L') {
+      current = current - magnitude;
+      if (current < 0) {
+        current = (current % 100 + 100) % 100;
+      }
+    } else if (direction === 'R') {
+      current = current + magnitude;
+      if (current >= 100) {
+        current = current % 100;
+      }
+    }
+
+    if (current === 0) {
+      zeroCounter++;
+    }
+  }
 
   return zeroCounter;
 }
 
-// Find and print out the number of adapters separated by 1 jolt 
-// multiplied by adapters separeted by 3 jolts.
-console.log('Number of 1-jolt diffs * Number of 3-jolf diffs '
-              + joltMultiplier(text));
+// Find and print out the number of times the dial points at 0
+console.log(
+  'The number of times the dial is left pointing at 0 after any rotation in the sequence:',
+  secretEntrance(text)
+);
